@@ -12,17 +12,11 @@ public class Temprature {
 		// { 73, 72, 71, 74, 75, 71, 69, 72, 76, 73 };
 		// { 3, 2, 1, 1, 4, 2, 1, 1, 0, 0}
 
-		int[] T = { 73, 72, 71, 74, 75, 71, 69, 72, 76, 73 };
+		// int[] T = { 73, 72, 71, 74, 75, 71, 69, 72, 76, 73 };
+		int[] T = { 73, 74, 75, 71, 69, 72, 76, 73 };
 		int[] P = findDays2(T);
 
 		System.out.println(Arrays.toString(P));
-
-		Stack<Integer> stack = new Stack<>();
-		stack.push(1);
-		stack.push(2);
-		stack.push(3);
-
-		System.out.println("ss: " + stack);
 	}
 
 	private static int[] findDays(int[] a) {
@@ -44,16 +38,12 @@ public class Temprature {
 		int[] b = new int[a.length];
 		Stack<Integer> stack = new Stack<>();
 		for (int i = 0; i < b.length; i++) {
-			while (!stack.isEmpty() && a[i] > stack.peek()) {
-				b[i] = stack.size();
-				stack.pop();
-				break;
+			while (!stack.isEmpty() && a[i] > a[stack.peek()]) {
+				int t = stack.pop();
+				b[t] = i - t;
 			}
-			stack.push(a[i]);
+			stack.push(i);
 		}
-
-		System.out.println("stack: " + stack);
-
 		return b;
 	}
 
